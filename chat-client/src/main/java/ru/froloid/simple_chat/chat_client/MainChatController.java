@@ -44,7 +44,7 @@ public class MainChatController implements Initializable {
         if (message.isBlank()) {
             return;
         }
-        mainChatArea.appendText(message + System.lineSeparator());
+        mainChatArea.appendText(getRecipientName() + ": " + message + System.lineSeparator());
         inputField.clear();
     }
 
@@ -55,5 +55,10 @@ public class MainChatController implements Initializable {
             contacts.add("Contact#" + (i + 1));
         }
         contactList.setItems(FXCollections.observableList(contacts));
+    }
+
+    public String getRecipientName() {
+        return  contactList.getSelectionModel().getSelectedItem() == null ? "ALL"
+                : (String) contactList.getSelectionModel().getSelectedItem();
     }
 }
